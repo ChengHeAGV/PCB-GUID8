@@ -1,0 +1,12 @@
+Board Information Report
+Filename     : C:\Users\Administrator\Desktop\PCB电路图\磁导航\多通道.PcbDoc
+Date         : 2016/10/19 星期三
+Time         : 上午 11:24:00
+Time Elapsed : 00:00:00
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 330
+    Connections routed, 330
+    Connections remaining, 0
+count : 4

@@ -1,0 +1,12 @@
+Board Information Report
+Filename     : C:\Users\Administrator\Desktop\PCB电路图\磁导航检测板\检测板.PcbDoc
+Date         : 2016/10/14 星期五
+Time         : 下午 2:23:25
+Time Elapsed : 00:00:00
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 32
+    Connections routed, 32
+    Connections remaining, 0
+count : 4
