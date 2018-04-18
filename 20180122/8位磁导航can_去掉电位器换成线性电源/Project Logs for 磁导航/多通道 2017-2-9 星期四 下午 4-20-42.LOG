@@ -1,0 +1,5 @@
+Added Component: Designator=C12(0603-CAP)
+Added Pin To Net: NetName=VCC3.3 Pin=C12-1
+Added Pin To Net: NetName=GND Pin=C12-2
+Added Pin To Net: NetName=VCC24 Pin=D11-1
+Added Member To Class: ClassName=змЭМ Member=Component C12 104
