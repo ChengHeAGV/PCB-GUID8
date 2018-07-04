@@ -1,0 +1,464 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : sans-serif;
+			color : white;
+			background-color : #21489e;
+			padding: 0.3em;
+		}
+		body {
+			font-family : verdana;
+		}
+		td, th {
+			padding: 0.5em;
+			text-align : center;
+			width : 18%;
+		}
+		th {
+			background-color : #A6CAF0;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+		}
+		
+		.DRC_summary_header {							
+			padding-bottom : 0.1em;
+			border : 0px solid black;							
+			width: 100%;
+                        align: right;
+                        
+		}
+
+		.DRC_summary_header_col1, 
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3
+		{
+			color : black;
+			font-size:150%;
+                        padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2: 0em;
+			border : 0px solid black;
+			width : auto;
+			vertical-align: top;
+			font-weight: bold;				
+		}
+		
+		.DRC_summary_header_col1 	
+		{		                       
+			text-align: right;
+                        width: auto;	
+		}
+
+		.DRC_summary_header_col2 	
+		{		
+			text-align: center;	
+		}
+
+		.DRC_summary_header_col3 	
+		{		
+			text-align: left;	
+		}
+
+
+		
+		.header_holder
+		{
+		Width = 100%;
+		border = 0px solid green;
+		padding = 0;
+		}
+		
+		
+		
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+                {
+			left:0;
+			top:0;
+			padding-top : 0.1em;			
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top
+
+		}
+		.front_matter {	
+			
+			margin-top: 5px;
+ 			margin-left: 0px;					 			
+ 			horizontal-align: left;
+		}
+				
+		
+		.front_matter_column1 {
+			width : 10em;	
+			text-align  : right;
+			padding-right:0.1em;
+			
+		}
+		
+		.front_matter_column2 {
+                        width: 0.1em;
+			align: center;
+			text-align : center;
+			margin-right  : 0.1em;	
+			margin-left   : 0.1em;
+		}
+		.front_matter_column3 {
+			width         : auto;  
+			text-align    : left;	
+			margin-right  : 0.5em;				
+		}
+		
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : right;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #EEEEE0 
+		}
+		tr.onmouseout_even { 
+			background-color : #F3F3E3   
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : lightYellow
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #008000 
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD15\Templates\AD-rgb_logo_223x64.gif
+		"><a href="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports" class="customize"><acronym title="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports">customize</acronym></a><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td Style="width:70%">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">2018/1/17</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">11:06:36</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">00:00:06</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3"><a href="file:///D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc" class="file"><acronym title="D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc">D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td Style="Width:30%">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings</td>
+<td class="DRC_summary_header_col2">:</td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations</td>
+<td class="DRC_summary_header_col2">:</td>
+<td class="DRC_summary_header_col3" style="color : red">32</td></tr>
+</table>
+</td>
+</table>
+<hr><a name="ID3ON4FIPFNIMAJ1ZMH4XLQUPM2PGDWDDMVXQ3AWIDLSKBSTR3IRUO"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKSYIFS5SPSIQN1X3F4C2XN3XLMNNH3QUGIDSIND0Z4P5PNRRRV">Clearance Constraint (Gap=0.152mm) (All),(All)</a></td>
+<td class="column2">32</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDD4SIGBUF4NL5LL0NTPYEBR1SECKLCAFBJK3MQ1CUUAZI3Q42NJIK">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBQ32WJU5QVMOJSIUEBZG4VP2VHQYP4KOZIRHSSEDDSM2A0OI4NFG">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOVKKLMBKGMTKCVHQCFNLPIOWHJHBCBNGBED1OOIRA4GT532ZFCYL">Clearance Constraint (Gap=2.6mm) (HasPad('Free-2')or HasPad('Free-3')),(InPolygon)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZVTLMDEAUZZMOK5SSQLLLH1USDH50CF4LSN0NDECAU3PFLJTEJPH">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0GEGSIY0YORRPH0ZG502WYHP4GBVLK5L2UGTDOHGACADPPOMV24B">Width Constraint (Min=0.152mm) (Max=1.27mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4KPX5GW3DCEZJ1GLEU5UFU0PLB133E4LBCHF4LE0VWB3INUAKLC">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRWAIT345ZXJ4DQXFI4RZEDL1YMOXMVLSORFVOQMQHNDMA1PJIDNM">Hole Size Constraint (Min=0.025mm) (Max=6mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQ51IFATAMSK2NNSPWJ3J3U1C3G44RX4DIC5KRZIFBS4UUAUHG01I">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNAOB4VI1T0IMB0Q0GNZ5W5D3RLMOVUA4VSGW0TLI2NKSHLFNKUMC">Minimum Solder Mask Sliver (Gap=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKCE1TEHN1444PXOF51X1ILDN1FOJI3YWLWXQENDHAFPE5LE2ON1G">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDH0FLYXBIL1ZKGIGDKO3E3P1EDVZJG0G4Q1XRBO20OCKV2HAOCY">Clearance Constraint (Gap=0.3mm) (InPolygon),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">32</td>
+</tr>
+</table><br><hr><a name="IDKSYIFS5SPSIQN1X3F4C2XN3XLMNNH3QUGIDSIND0Z4P5PNRRRV"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Clearance Constraint (Gap=0.152mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16654.087mil|Location2.X=16701.457mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16654.087mil|Location2.X=16701.457mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh1-1(9.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16732.827mil|Location2.X=16780.197mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16732.827mil|Location2.X=16780.197mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh1-2(11.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16811.567mil|Location2.X=16858.937mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16811.567mil|Location2.X=16858.937mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh1-3(13.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16890.307mil|Location2.X=16937.677mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16890.307mil|Location2.X=16937.677mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh1-4(15.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18071.41mil|Location2.X=18118.78mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18071.41mil|Location2.X=18118.78mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh4-4(45.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17992.669mil|Location2.X=18040.039mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17992.669mil|Location2.X=18040.039mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh4-3(43.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17913.929mil|Location2.X=17961.299mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17913.929mil|Location2.X=17961.299mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh4-2(41.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17835.189mil|Location2.X=17882.559mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17835.189mil|Location2.X=17882.559mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh4-1(39.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19016.291mil|Location2.X=19063.661mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19016.291mil|Location2.X=19063.661mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh7-1(69.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19095.031mil|Location2.X=19142.401mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19095.031mil|Location2.X=19142.401mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh7-2(71.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19173.772mil|Location2.X=19221.142mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19173.772mil|Location2.X=19221.142mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh7-3(73.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19252.512mil|Location2.X=19299.882mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19252.512mil|Location2.X=19299.882mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh7-4(75.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19646.212mil|Location2.X=19693.582mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19646.212mil|Location2.X=19693.582mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh8-4(85.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19567.472mil|Location2.X=19614.842mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19567.472mil|Location2.X=19614.842mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh8-3(83.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19488.732mil|Location2.X=19536.102mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19488.732mil|Location2.X=19536.102mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh8-2(81.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19409.992mil|Location2.X=19457.362mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19409.992mil|Location2.X=19457.362mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh8-1(79.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17047.787mil|Location2.X=17095.158mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17047.787mil|Location2.X=17095.158mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh2-1(19.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17126.528mil|Location2.X=17173.898mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17126.528mil|Location2.X=17173.898mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh2-2(21.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17205.268mil|Location2.X=17252.638mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17205.268mil|Location2.X=17252.638mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh2-3(23.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17284.008mil|Location2.X=17331.378mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17284.008mil|Location2.X=17331.378mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh2-4(25.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17677.709mil|Location2.X=17725.079mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17677.709mil|Location2.X=17725.079mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh3-4(35.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17598.969mil|Location2.X=17646.339mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17598.969mil|Location2.X=17646.339mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh3-3(33.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17520.228mil|Location2.X=17567.598mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17520.228mil|Location2.X=17567.598mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh3-2(31.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17441.488mil|Location2.X=17488.858mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17441.488mil|Location2.X=17488.858mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh3-1(29.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18228.89mil|Location2.X=18276.26mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18228.89mil|Location2.X=18276.26mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh5-1(49.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18307.63mil|Location2.X=18355mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18307.63mil|Location2.X=18355mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh5-2(51.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18386.37mil|Location2.X=18433.74mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18386.37mil|Location2.X=18433.74mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh5-3(53.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18465.11mil|Location2.X=18512.48mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18465.11mil|Location2.X=18512.48mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh5-4(55.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18858.811mil|Location2.X=18906.181mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18858.811mil|Location2.X=18906.181mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh6-4(65.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18780.071mil|Location2.X=18827.441mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18780.071mil|Location2.X=18827.441mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh6-3(63.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18701.331mil|Location2.X=18748.701mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18701.331mil|Location2.X=18748.701mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh6-2(61.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16299.252mil|Location2.X=20049.41mil|Location1.Y=8997mil|Location2.Y=9007mil|Absolute=True">Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=D:\guokai\PCB%E7%94%B5%E8%B7%AF%E5%9B%BE\AGV_PCB_20171228\%E7%A3%81%E5%AF%BC%E8%88%AAcan\%E5%A4%9A%E9%80%9A%E9%81%93.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18622.591mil|Location2.X=18669.961mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18622.591mil|Location2.X=18669.961mil|Location1.Y=9004.213mil|Location2.Y=9090.953mil|Absolute=True">Pad U5_cdh6-1(59.487mm,-32.842mm)  Top Layer</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br></body>
+</html>

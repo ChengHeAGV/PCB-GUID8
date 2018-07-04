@@ -1,4 +1,0 @@
-Removed Pin From Net: NetName=VCC8 Pin=VR1-1
-Removed Pin From Net: NetName=NetC14_1 Pin=VR1-3
-Added Pin To Net: NetName=NetC14_1 Pin=VR1-1
-Added Pin To Net: NetName=VCC8 Pin=VR1-3

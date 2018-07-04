@@ -1,5 +1,0 @@
-Removed Pin From Net: NetName=GND Pin=C14-2
-Removed Pin From Net: NetName=VCC8 Pin=C21-1
-Removed Pin From Net: NetName=GND Pin=C21-2
-Removed Member From Class: ClassName=змЭМ Member=C21
-Added Member To Class: ClassName=змЭМ Member=Component U2 AMS1117-3.3

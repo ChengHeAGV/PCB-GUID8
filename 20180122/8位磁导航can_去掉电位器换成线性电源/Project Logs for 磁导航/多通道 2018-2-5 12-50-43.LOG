@@ -1,6 +1,0 @@
-Removed Pin From Net: NetName=VCC3.3 Pin=D13-1
-Removed Pin From Net: NetName=GND Pin=D13-2
-Change Component DesignItemId : Designator=D13 Old DesignItemId=Diode 18TQ045 New DesignItemId=D Zener
-Change Component Description : Designator=D13 Old Description=Schottky Rectifier New Description=Zener Diode
-Added Pin To Net: NetName=GND Pin=D13-1
-Added Pin To Net: NetName=VCC3.3 Pin=D13-2

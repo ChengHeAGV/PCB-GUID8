@@ -1,0 +1,41 @@
+Field=Comment~String~Comment~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~磁导航.PrjPCB|ReportField=ProjectFullPath~C:\Users\Administrator\Desktop\PCB电路图\磁导航can\磁导航.PrjPCB|ReportField=Title~Bill of Materials For Project [磁导航.PrjPCB] (No PCB Document Selected)|ReportField=TotalQuantity~185|ReportField=ReportTime~下午 2:07:01|ReportField=ReportDate~2017/1/10 星期二|ReportField=ReportDateTime~2017/1/10 星期二 下午 2:07:01|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~2017/1/10 星期二|ReportField=CurrentTime~下午 2:06:33|ReportField=Date~|ReportField=DocumentFullPathAndName~C:\Users\Administrator\Desktop\PCB电路图\磁导航can\总图.SchDoc|ReportField=DocumentName~总图.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~2016/12/26 星期一|ReportField=Organization~|ReportField=ProjectName~磁导航.PrjPCB|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~磁导航.PrjPCB|ReportField=DataSourceFullPath~C:\Users\Administrator\Desktop\PCB电路图\磁导航can\磁导航.PrjPCB
+0.1uF
+Cap
+0.1uF
+100uF/6.3V
+0.1uF
+LED0
+LED0
+1N4007
+SS34
+Fuse 1
+Inductor
+温度开关(常闭)
+Header 4
+Header 4
+NPN
+390K
+3K
+8.2K
+Res Tap
+30K
+1K
+4.7K
+2.2K
+1M
+10K
+120R
+1k
+100K
+365K
+29.4K
+40.2K
+200K
+AMS1117
+LM317
+Header 4
+TLC2264
+STM32F103C8T6
+SN65HVD230
+MP1584
+8M

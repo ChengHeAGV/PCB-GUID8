@@ -1,0 +1,108 @@
+Protel Design System Design Rule Check
+PCB File : D:\guokai\PCB电路图\AGV_PCB_20171228\磁导航can\多通道.~(1096).PcbDoc
+Date     : 2018/1/17
+Time     : 11:06:36
+
+Processing Rule : Clearance Constraint (Gap=0.152mm) (All),(All)
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh1-1(9.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh1-2(11.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh1-3(13.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh1-4(15.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh4-4(45.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh4-3(43.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh4-2(41.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh4-1(39.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh7-1(69.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh7-2(71.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh7-3(73.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh7-4(75.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh8-4(85.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh8-3(83.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh8-2(81.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh8-1(79.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh2-1(19.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh2-2(21.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh2-3(23.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh2-4(25.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh3-4(35.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh3-3(33.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh3-2(31.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh3-1(29.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh5-1(49.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh5-2(51.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh5-3(53.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh5-4(55.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh6-4(65.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh6-3(63.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh6-2(61.487mm,-32.842mm)  Top Layer
+   Violation between Track (0mm,-34mm)(95mm,-34mm)  Keep-Out Layer and 
+                     Pad U5_cdh6-1(59.487mm,-32.842mm)  Top Layer
+Rule Violations :32
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=2.6mm) (HasPad('Free-2')or HasPad('Free-3')),(InPolygon)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.152mm) (Max=1.27mm) (Preferred=0.254mm) (All)
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=6mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.3mm) (InPolygon),(All)
+Rule Violations :0
+
+
+Violations Detected : 32
+Time Elapsed        : 00:00:06

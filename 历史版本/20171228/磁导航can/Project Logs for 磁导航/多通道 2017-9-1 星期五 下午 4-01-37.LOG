@@ -1,0 +1,3 @@
+Change Component DesignItemId : Designator=D13 Old DesignItemId=Diode 10TQ035 New DesignItemId=Diode 18TQ045
+Change Component Footprint: Designator=D13 Old Footprint=SMB(DO-214AA)_S1 New Footprint=SMA(DO-214AC)_S1
+Added Pin To Net: NetName=GND Pin=D13-2

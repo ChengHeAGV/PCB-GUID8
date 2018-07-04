@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=NetC21_1 Pin=D12-1
+Removed Pin From Net: NetName=GND Pin=D12-2
+Change Component DesignItemId : Designator=D12 Old DesignItemId=Diode 18TQ045 New DesignItemId=D Zener
+Change Component Description : Designator=D12 Old Description=Schottky Rectifier New Description=Zener Diode
+Added Pin To Net: NetName=GND Pin=D12-1
+Added Pin To Net: NetName=NetC21_1 Pin=D12-2
